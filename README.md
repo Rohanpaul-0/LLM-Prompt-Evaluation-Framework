@@ -60,6 +60,4 @@ python -m quilleval.cli evaluate `
   --registry quilleval.db
 
 
-## Test Result
-<img width="2157" height="952" alt="image" src="https://github.com/user-attachments/assets/e89da2cd-294c-43d2-a115-acb10f2a00ff" />
 
