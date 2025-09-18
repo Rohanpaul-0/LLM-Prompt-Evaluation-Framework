@@ -1,0 +1,2 @@
+﻿{"id":1,"prompt":"Capital of France?","reference":"Paris","candidate":{"promptA":"Paris","promptB":"Lyon"},"tags":["qa","geo"]}
+{"id":2,"prompt":"Largest ocean?","reference":"Pacific Ocean","candidate":{"promptA":"Pacific Ocean","promptB":"Atlantic"},"tags":["qa","geo"]}

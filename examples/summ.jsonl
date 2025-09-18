@@ -1,0 +1,1 @@
+﻿{"id":1,"prompt":"Summarize: Unit tests verify small units of code...","reference":"Unit tests catch regressions and enable refactors.","candidate":{"pA":"They catch regressions and support refactoring.","pB":"They are slow and not needed."},"tags":["sum"]}
