@@ -44,3 +44,22 @@ pip install -r requirements.txt
 
 # Install QuillEval (editable mode)
 pip install -e .
+
+
+
+
+## Evaluate
+
+pip install -e .
+python -m quilleval.cli evaluate `
+  --data .\examples\qa.jsonl `
+  --out qa.csv `
+  --weights bleu=0.3 `
+  --weights rougeL=0.3 `
+  --weights semantic=0.4 `
+  --registry quilleval.db
+
+
+## Test Result
+<img width="2157" height="952" alt="image" src="https://github.com/user-attachments/assets/e89da2cd-294c-43d2-a115-acb10f2a00ff" />
+
