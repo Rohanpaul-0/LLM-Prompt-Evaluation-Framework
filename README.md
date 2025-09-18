@@ -1,38 +1,46 @@
 # QuillEval — Prompt & LLM Output Evaluation
 
-QuillEval is a research-grade framework to **evaluate and compare LLM prompts and model outputs**.
-It combines *reference-based* (BLEU, ROUGE), *embedding-based* (SBERT cosine), and *distribution-aware* analysis
-(bootstrap confidence intervals, per-slice breakdowns), with a modular plug‑in metric API.
+QuillEval is a framework for evaluating and comparing large language model (LLM) prompts and outputs.  
+It combines traditional reference-based metrics (BLEU, ROUGE), embedding-based similarity (SBERT cosine), and statistical analysis (bootstrap confidence intervals, per-tag summaries).  
+The design treats evaluation as a reproducible experiment: inputs, configuration, metrics, and results are stored in a lightweight SQLite registry.
 
-**Why this exists**  
-Most toolkits focus on one metric. QuillEval treats evaluation as an experiment: inputs, config,
-metrics, and results are tracked in a lightweight SQLite registry for reproducibility.
+---
+
+## Why QuillEval?
+Most existing tools only provide a single type of metric or focus on one-off comparisons.  
+QuillEval is built for iteration and reproducibility:
+
+- Multiple metrics can be combined with configurable weights.
+- Results are summarized both overall and by tag (for specific categories such as `math`, `safety`, etc.).
+- Every run is logged to an experiment registry for later inspection.
+
+---
 
 ## Features
-- 🧩 **Plugin metric API**: add custom metrics via a simple decorator
-- 🧪 **Confidence intervals** via nonparametric bootstrap
-- 🔍 **Per-slice analysis**: tag records (e.g., `math`, `safety`) and get per-tag summaries
-- 🧠 **Semantic similarity**: Sentence-Transformers cosine with configurable model
-- 📈 **Reports**: CSV + pretty console tables
-- 🗄️ **Run registry** (SQLite): store config, git info, scores; list/compare later
-- 🧰 **CLI** with subcommands: `evaluate`, `report`, `runs ls`, `runs show`
+- Plugin metric API: extend QuillEval with your own custom metrics.
+- Confidence intervals: scores include nonparametric bootstrap confidence intervals.
+- Per-tag analysis: tag records (e.g., `math`, `security`) and get summaries for each group.
+- Semantic similarity: SBERT cosine similarity with configurable model.
+- Reports: outputs are saved to CSV and displayed in rich console tables.
+- Run registry (SQLite): store run configuration, metrics, and git information; list and compare runs later.
+- Command-line interface (CLI): includes `evaluate`, `runs-ls`, and `runs-show` commands.
 
-## Quickstart
+---
+
+## Installation
+
 ```bash
-python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+# Create virtual environment
+python -m venv .venv
+
+# Activate it
+# On macOS/Linux
+source .venv/bin/activate
+# On Windows
+.venv\Scripts\activate
+
+# Install dependencies
 pip install -r requirements.txt
 
-# Evaluate the example dataset (multi-candidate + slices)
-python -m quilleval.cli evaluate   --data examples/demo.jsonl   --out results.csv   --sbert-model sentence-transformers/all-MiniLM-L6-v2   --weights bleu=0.15 rougeL=0.35 semantic=0.5   --registry quilleval.db
-```
-
-## Data format (JSONL/CSV/JSON)
-Each record:
-- `id`: str/int
-- `prompt`: str
-- `reference`: str or list[str]
-- `candidate`: str or dict `{name: output}`
-- `tags` (optional): list[str] for slice analysis
-
-## License
-MIT
+# Install QuillEval (editable mode)
+pip install -e .
